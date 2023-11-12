@@ -1,10 +1,12 @@
 import com.github.javafaker.Faker;
 import lombok.Value;
 
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Random;
+
 
 public class DataGenerator {
     private DataGenerator() {
@@ -27,8 +29,9 @@ public class DataGenerator {
         return faker.name().lastName() + " " + faker.name().firstName();
     }
 
-    public static String generatePhone(String locale) {
-        var faker = new Faker(new Locale(locale));
+    public static String generatePhone() {
+        Locale locale = new Locale("ru");
+        Faker faker = new Faker(locale);
         return faker.phoneNumber().phoneNumber();
     }
 
@@ -37,7 +40,13 @@ public class DataGenerator {
         }
 
         public static UserInfo generateUser(String locale) {
-            return new UserInfo(generateCity(), generateName(locale), generatePhone(locale));
+            UserInfo user;
+            user = new UserInfo(
+                    generateCity(),
+                    generateName(locale),
+                    generatePhone()
+            );
+            return user;
         }
     }
 
